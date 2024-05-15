@@ -1,14 +1,49 @@
 .container {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 1fr 1fr;
+  height: auto;
   width: 70%;
   margin: auto;
   text-align: center;
-}
 
-.dice {
-  text-align: center;
-  display: inline-block;
 
 }
+.egy{
+  grid-column: span 2;
+}
+
+.winner{
+  grid-column: span 2;
+}
+
+.winner h1 {
+  font-size: 5rem;
+}
+
+.winner span {
+  font-size: 3rem;
+}
+
+.bal{
+  text-align: right;
+  padding-right: 50px;
+  margin-bottom: 30px;
+}
+.bal p {
+  padding-right: 50px;
+}
+
+.jobb{
+  text-align: left;
+  padding-left: 50px;
+  margin-bottom: 30px;
+}
+.jobb p {
+  padding-left: 50px;
+}
+
+
 
 body {
   background-color: #393E46;
@@ -29,7 +64,7 @@ p {
 }
 
 img {
-  width: 80%;
+  max-width: 200px;
 }
 
 footer {
@@ -38,4 +73,43 @@ footer {
   text-align: center;
   font-family: 'Indie Flower', cursive;
 
+}
+.roll{
+  grid-column: span 2;
+  justify-content: center;
+}
+
+.roll img{ 
+  width: 60px;
+  padding: 30px;
+}
+
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #4ECCA3;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
 }

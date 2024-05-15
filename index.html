@@ -11,29 +11,58 @@
   </head>
   <body>
     <div class="container">
-      <h1>Refresh Me</h1>
-
-      <div class="dice">
-        <p>Player 1</p>
-        <img class="img1" src=""
-
-      <div class="dice">
-        <p>Player 2</p>
-        <img class="img2" src="" />
+      <div class="egy"><h1>Dobj egyet!</h1></div>
+      <div class="bal">
+        <p id="player1"></p>
+        <img class="img1" src="./images/dice1.png" />
       </div>
+      <div class="jobb">
+        <p id="player2"></p>
+        <img class="img2" src="./images/dice1.png" />
+      </div>
+      <div class="roll">
+        <button onclick="rollDice()" class="button-54" role="button">
+          <img src="./images/dice-solid.svg" alt="" />
+        </button>
+      </div>
+      <div class="winner"></div>
     </div>
-
-    <footer>www 🎲 App Brewery 🎲 com</footer>
+    <footer>🎲 Bence játszótér 🎲</footer>
 
     <script>
-      document.onload = rollDice();
-      function rollDice(){
-        var randomNumber1 = Math.floor(Math.random()*6)+1;
-        var randomNumber2 = Math.floor(Math.random()*6)+1;
-          document.querySelector(".img1").setAttribute("src", "./images/dice"  + randomNumber1 + ".png");
-        document.querySelector(".img2").setAttribute("src", "./images/dice"  + randomNumber2 + ".png");
-      }
+      var player1;
+      var player2;
+      document.onload = whatsYourName();
 
-     </script>
+      function whatsYourName() {
+        player1 = prompt("1. játékos neve?");
+        player2 = prompt("2. játékos neve?");
+        document.getElementById("player1").innerHTML = player1;
+        document.getElementById("player2").innerHTML = player2;
+      }
+      function rollDice() {
+        var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+        var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+        var winner;
+        if (randomNumber1 > randomNumber2) {
+          winner = player1;
+          document.getElementsByClassName("winner")[0].innerHTML =
+            "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
+        } else if (randomNumber1 < randomNumber2) {
+          winner = player2;
+          document.getElementsByClassName("winner")[0].innerHTML =
+            "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
+        } else {
+          document.getElementsByClassName("winner")[0].innerHTML =
+            "<h1>Döntetlen</h1>";
+        }
+        document
+          .querySelector(".img1")
+          .setAttribute("src", "./images/dice" + randomNumber1 + ".png");
+        document
+          .querySelector(".img2")
+          .setAttribute("src", "./images/dice" + randomNumber2 + ".png");
+      }
+    </script>
   </body>
 </html>
