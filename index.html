@@ -10,6 +10,14 @@
     />
   </head>
   <body>
+    <div id="customPrompt" class="custom-prompt">
+      <div class="custom-prompt-content">
+          <p id="promptMessage"></p>
+          <input type="text" id="promptInput" />
+          <button onclick="submitPrompt()">OK</button>
+      </div>
+  </div>
+  
     <div class="container">
       <div class="egy"><h1>Dobj egyet!</h1></div>
       <div class="bal">
@@ -30,16 +38,40 @@
     <footer>🎲 Bence játszótér 🎲</footer>
 
     <script>
-      var player1;
-      var player2;
-      document.onload = whatsYourName();
+var player1;
+var player2;
 
-      function whatsYourName() {
-        player1 = prompt("1. játékos neve?");
-        player2 = prompt("2. játékos neve?");
+document.onload = whatsYourName();
+
+function whatsYourName() {
+    customPrompt("1. játékos neve?", function(result) {
+        player1 = result;
         document.getElementById("player1").innerHTML = player1;
-        document.getElementById("player2").innerHTML = player2;
-      }
+        customPrompt("2. játékos neve?", function(result) {
+            player2 = result;
+            document.getElementById("player2").innerHTML = player2;
+        });
+    });
+}
+
+function customPrompt(message, callback) {
+    var promptModal = document.getElementById('customPrompt');
+    var promptMessage = document.getElementById('promptMessage');
+    var promptInput = document.getElementById('promptInput');
+
+    promptMessage.innerText = message;
+    promptInput.value = ''; // Clear any previous input
+
+    promptModal.style.display = 'block';
+
+    window.submitPrompt = function() {
+        var inputValue = promptInput.value;
+        promptModal.style.display = 'none';
+        callback(inputValue);
+    };
+
+    promptInput.focus();
+}
       function rollDice() {
         var randomNumber1 = Math.floor(Math.random() * 6) + 1;
         var randomNumber2 = Math.floor(Math.random() * 6) + 1;
