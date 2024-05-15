@@ -97,8 +97,8 @@ function rollDice() {
         winner = player2;
         document.getElementsByClassName("winner")[0].innerHTML = "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
     } else {
-        winner = "Döntetlen";
-        document.getElementsByClassName("winner")[0].innerHTML = "Döntetlen";
+        
+        document.getElementsByClassName("winner")[0].innerHTML = "<h1>Döntetlen</h1>";
     }
 
     document.querySelector(".img1").setAttribute("src", "./images/dice" + randomNumber1 + ".png");
