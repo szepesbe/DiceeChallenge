@@ -12,12 +12,12 @@
   <body>
     <div id="customPrompt" class="custom-prompt">
       <div class="custom-prompt-content">
-          <p id="promptMessage"></p>
-          <input type="text" id="promptInput" />
-          <button onclick="submitPrompt()">OK</button>
+        <p id="promptMessage"></p>
+        <input type="text" id="promptInput" />
+        <button onclick="submitPrompt()">OK</button>
       </div>
-  </div>
-  
+    </div>
+
     <div class="container">
       <div class="egy"><h1>Dobj egyet!</h1></div>
       <div class="bal">
@@ -38,7 +38,7 @@
     <footer>🎲 Bence játszótér 🎲</footer>
 
     <script>
-var player1;
+    var player1;
 var player2;
 
 document.onload = whatsYourName();
@@ -64,37 +64,47 @@ function customPrompt(message, callback) {
 
     promptModal.style.display = 'block';
 
-    window.submitPrompt = function() {
+    function submit() {
         var inputValue = promptInput.value;
         promptModal.style.display = 'none';
         callback(inputValue);
-    };
+        promptInput.removeEventListener('keypress', handleKeyPress); // Remove the event listener
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            submit();
+        }
+    }
+
+    promptInput.addEventListener('keypress', handleKeyPress);
+
+    window.submitPrompt = submit;
 
     promptInput.focus();
 }
-      function rollDice() {
-        var randomNumber1 = Math.floor(Math.random() * 6) + 1;
-        var randomNumber2 = Math.floor(Math.random() * 6) + 1;
-        var winner;
-        if (randomNumber1 > randomNumber2) {
-          winner = player1;
-          document.getElementsByClassName("winner")[0].innerHTML =
-            "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
-        } else if (randomNumber1 < randomNumber2) {
-          winner = player2;
-          document.getElementsByClassName("winner")[0].innerHTML =
-            "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
-        } else {
-          document.getElementsByClassName("winner")[0].innerHTML =
-            "<h1>Döntetlen</h1>";
-        }
-        document
-          .querySelector(".img1")
-          .setAttribute("src", "./images/dice" + randomNumber1 + ".png");
-        document
-          .querySelector(".img2")
-          .setAttribute("src", "./images/dice" + randomNumber2 + ".png");
-      }
+
+// The rest of your rollDice function remains the same
+function rollDice() {
+    var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+    var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+    var winner;
+
+    if (randomNumber1 > randomNumber2) {
+        winner = player1;
+        document.getElementsByClassName("winner")[0].innerHTML = "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
+    } else if (randomNumber1 < randomNumber2) {
+        winner = player2;
+        document.getElementsByClassName("winner")[0].innerHTML = "<h1>Nyertes:<br><span>" + winner + "</span></h1>";
+    } else {
+        winner = "Döntetlen";
+        document.getElementsByClassName("winner")[0].innerHTML = "Döntetlen";
+    }
+
+    document.querySelector(".img1").setAttribute("src", "./images/dice" + randomNumber1 + ".png");
+    document.querySelector(".img2").setAttribute("src", "./images/dice" + randomNumber2 + ".png");
+}
+
     </script>
   </body>
 </html>
